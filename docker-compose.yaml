@@ -4,24 +4,27 @@ services:
     container_name: redis
     image: redis:6.2-alpine
     restart: always
+    # Порты для Redis можно оставить, если хочешь подключаться к нему извне (например, через TablePlus)
     ports:
       - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass pass
+    command: redis-server --save 20 1 --loglevel warning --requirepass password
+
   http-schedule-server:
     container_name: http-schedule-server
     build:
       context: .
       dockerfile: Dockerfile-http
-    ports:
-      - "80:80"
-      - "443:443"
+    # УДАЛЯЕМ блок ports: 80:80 и 443:443.
+    # Это предотвратит конфликт с панелью управления сервером.
     restart: always
     command: [ "/app/main", "http" ]
+
   grpc-schedule-server:
     container_name: grpc-schedule-server
     build:
       context: .
       dockerfile: Dockerfile-grpc
+    # gRPC можно оставить на своем порту
     ports:
       - "50051:50051"
     restart: always
