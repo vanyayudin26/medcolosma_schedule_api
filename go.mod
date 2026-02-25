@@ -7,7 +7,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.0
-	github.com/vanyayudin26/college_osma_parser/v2 v2.0.1
+	github.com/vanyayudin26/college_osma_parser/v2 v2.0.0
 	golang.org/x/crypto v0.21.0
 	golang.org/x/net v0.22.0
 	google.golang.org/grpc v1.62.1
@@ -27,5 +27,3 @@ require (
 	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240318140521-94a12d6c2237 // indirect
 )
-
-replace github.com/vanyayudin26/college_osma_parser/v2 => ../college_osma_parser
