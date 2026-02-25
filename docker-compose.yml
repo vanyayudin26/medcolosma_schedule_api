@@ -1,0 +1,25 @@
+version: '3'
+services:
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
+    restart: always
+    # Убрали порты наружу для безопасности
+    command: redis-server --save 20 1 --loglevel warning --requirepass pass
+
+  http-schedule-server:
+    container_name: http-schedule-server
+    build:
+      context: .
+      dockerfile: Dockerfile-http
+    # Убрали порты 80 и 443 — Coolify сам прокинет трафик внутрь
+    restart: always
+    command: [ "/app/main", "http" ]
+
+  grpc-schedule-server:
+    container_name: grpc-schedule-server
+    build:
+      context: .
+      dockerfile: Dockerfile-grpc
+    restart: always
+    command: [ "/app/main", "grpc" ]
